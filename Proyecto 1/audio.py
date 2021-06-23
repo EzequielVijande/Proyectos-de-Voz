@@ -121,7 +121,7 @@ def FormantsToPhoneme(f1,f2,sex, inv_dict):
         vowel = male_vowel_inv_dict[keys_array[index]]
         return vowel
 
-filename = "Audios/m n l r sh a e i o u.wav"
+filename = "hello.wav"
 wf = wave.open(filename, 'rb')
 fs = wf.getframerate()
 audio, sr = load(filename)
@@ -187,6 +187,7 @@ phoneme_list = []
 ratio_list = []
 i=0
 
+
 for buffer in frames:
     start_time = perf_counter()
     is_sound = False # done
@@ -198,7 +199,7 @@ for buffer in frames:
     #LPC y espectro
     hp_filtered = preemphasis(windowed_frame, coef=1)
     downsampled = resample(hp_filtered, sr, new_fs)
-    coefs = lpc(downsampled, lpc_order) #Revisar si son coeficientes del filtro de error o del predictivo
+    coefs = lpc(downsampled, lpc_order)
     spectrum = 1/abs(np.fft.rfft(coefs,n=N))
     
     # Sound or Silence
